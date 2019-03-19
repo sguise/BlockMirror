@@ -38,6 +38,11 @@
 
 /* Editor styling */
 
+.CodeMirror {
+  border: 1px solid #eee;
+  height: auto;
+}
+
 .cm-s-ambiance.CodeMirror {
   line-height: 1.40em;
   color: #E6E1DC;
