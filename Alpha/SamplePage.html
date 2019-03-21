@@ -397,10 +397,10 @@
 		window.addEventListener('resize', editonresize, false);
 		editonresize();
 		
-		
+		var code = Blockly.Python.workspaceToCode(workspace);
 		
 		var editor = CodeMirror(document.getElementById("editorDiv"), {
-			value: "",
+			value: code,
 			mode: "python",
 			tabSize: 5,
 			lineNumbers: true,
@@ -408,6 +408,16 @@
 			viewportMargin: Infinity,
 			extraKeys: { "Ctrl-Space": "autocomplete" }
 		});
+		
+		function myUpdateFunction(event) {
+			code = Blockly.Python.workspaceToCode(workspace);
+			console.log(code);
+			//document.getElementById('value').value = code;
+			
+			editor.getDoc().setValue(code);
+		}
+		workspace.addChangeListener(myUpdateFunction);
+		
 		
 		
 		
