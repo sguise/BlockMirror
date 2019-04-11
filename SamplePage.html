@@ -411,9 +411,14 @@
 			console.log(code);
 			//document.getElementById('value').value = code;
 
-			editor.getDoc().setValue(code);
+			editor.setValue(code);
 		}
 		workspace.addChangeListener(myUpdateFunction);
+
+		window.setInterval(function(){
+			console.log(editor.getValue());
+		}, 1000);
+
     </script>
 
 </html>
