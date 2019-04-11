@@ -1,4 +1,4 @@
-x<html>
+<html>
 	<head>
 		<script src="../node_modules/codemirror/lib/codemirror.js"></script>
 		<link rel="stylesheet" href="../node_modules/codemirror/lib/codemirror.css">
@@ -12,6 +12,9 @@ x<html>
 			body {
 				background-color: #eee;
 			}
+			.CodeMirror{
+				height: auto;
+			}
 		</style>
 	</head>
 
@@ -24,14 +27,14 @@ x<html>
         </tbody>
 	</table>
 
-	<script src="../blockly/blockly_compressed.js"></script>
-	<script src="../blockly/python_compressed.js"></script>
+	<script src="../node_modules/blockly/blockly_compressed.js"></script>
+	<script src="../node_modules/blockly/python_compressed.js"></script>
 
-	<script src="../blockly/blocks_compressed.js"></script>
-	<script src="../blockly/msg/js/en.js"></script>
+	<script src="../node_modules/blockly/blocks_compressed.js"></script>
+	<script src="../node_modules/blockly/msg/js/en.js"></script>
 
 	<div id="blocklyDiv" style="position: absolute"></div>
-	<div id="editorDiv" style="position: absolute"></div>
+	<div id="editorDiv" style="position: absolute;" ></div>
 
 	<xml id="toolbox" style="display: none">
 	  <category name="Logic" colour="%{BKY_LOGIC_HUE}">
@@ -343,7 +346,6 @@ x<html>
 	  <category name="Variables" colour="%{BKY_VARIABLES_HUE}" custom="VARIABLE"></category>
 	  <category name="Functions" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
 	</xml>
-
 
 	<script>
 		var blocklyArea = document.getElementById('blocklyArea');
