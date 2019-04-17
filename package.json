@@ -1,0 +1,19 @@
+{
+  "name": "js-runtime",
+  "version": "1.0.0",
+  "description": "Source to source compiler using ANTLR",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "compile": "npm run antlr4-js",
+    "antlr4-js": "java -Xmx500M org.antlr.v4.Tool  -Dlanguage=JavaScript -lib grammars -o lib -visitor -Xexact-output-dir grammars/ECMAScript.g4",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Zhihao Zhang<zzhsaga@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "antlr4": "^4.7.2",
+    "blockly": "^1.0.0",
+    "codemirror": "^5.45.0"
+  }
+}
