@@ -8,11 +8,8 @@
 		<script src="../node_modules/codemirror/addon/hint/css-hint.js"></script>
 		<link rel="stylesheet" href="../node_modules/codemirror/addon/hint/show-hint.css">
 		<link rel="stylesheet" href="../node_modules/codemirror/theme/ambiance.css">
-
-		<script src='./lib/require.js'></script>
-		<script>
-				var antlr4 = require('../node_modules/antlr4/index');
-		 </script>
+		
+		<script src="../index.js"></script>
 		 
 		<style>
 			body {
@@ -355,9 +352,7 @@
 
 	<script>
 		//antlr4
-		var antlr4 = require('antlr4');
-		var ECMAScriptLexer = require('../lib/ECMAScriptLexer.js');
-		var ECMAScriptParser = require('../lib/ECMAScriptParser.js');
+		
 		//
 		var blocklyArea = document.getElementById('blocklyArea');
 		var blocklyDiv = document.getElementById('blocklyDiv');
@@ -418,6 +413,17 @@
 		});
 
 		//antlr input
+		
+		//const input = '{x: new Number(100)}';//input
+
+		// const chars = new antlr4.InputStream(input);
+		// const lexer = new ECMAScriptLexer.ECMAScriptLexer(chars);
+
+		// lexer.strictMode = false; 
+
+		// const tokens = new antlr4.CommonTokenStream(lexer);
+		// const parser = new ECMAScriptParser.ECMAScriptParser(tokens);
+
 		const input = '{x: new Number(100)}';//input
 
 		const chars = new antlr4.InputStream(input);
@@ -427,8 +433,6 @@
 
 		const tokens = new antlr4.CommonTokenStream(lexer);
 		const parser = new ECMAScriptParser.ECMAScriptParser(tokens);
-
-		
 
 		function myUpdateFunction(event) {
 			code = Blockly.Python.workspaceToCode(workspace);
@@ -441,7 +445,7 @@
 		
 		//antlr tree printer
 		console.log('JavaScript input:');
-		console.log(input);
+		console.log(ainput);
 		console.log('output:');
 		try {
   	tree = parser.program();
