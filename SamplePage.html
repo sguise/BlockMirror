@@ -346,8 +346,10 @@
 
 
 	<script>
+		
 		var blocklyArea = document.getElementById('blocklyArea');
 		var blocklyDiv = document.getElementById('blocklyDiv');
+		var dragLoc = 1;
 		var workspace = Blockly.inject(blocklyDiv,
 		  {toolbox: document.getElementById('toolbox')});
 		var onresize = function(e) {
@@ -363,7 +365,7 @@
 			// Position blocklyDiv over blocklyArea.
 			blocklyDiv.style.left = x + 'px';
 			blocklyDiv.style.top = y + 'px';
-			blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+			blocklyDiv.style.width = (blocklyArea.offsetWidth+3)*dragLoc + 'px';
 			blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
 			Blockly.svgResize(workspace);
 		};
@@ -378,20 +380,26 @@
 	
 		var editorArea = document.getElementById('editorArea');
 		var editorDiv = document.getElementById('editorDiv');
+		var dividerX;
 		var editonresize = function(e) {
 			// Compute the absolute coordinates and dimensions of blocklyArea.
 			var editelement = editorArea;
 			var editx = 0;
 			var edity = 0;
+			var xshift = editelement.offsetLeft*dragLoc;
+			editx += xshift;
+			edity += editelement.offsetTop;
+			editelement = editelement.offsetParent;
 			do {
 				  editx += editelement.offsetLeft;
 				  edity += editelement.offsetTop;
 				  editelement = editelement.offsetParent;
 			} while (editelement);
 			// Position editorDiv over editorArea.
+			dividerX=editx;
 			editorDiv.style.left = editx + 'px';
 			editorDiv.style.top = edity + 'px';
-			editorDiv.style.width = editorArea.offsetWidth + 'px';
+			editorDiv.style.width = window.innerWidth-xshift + 'px';
 			editorDiv.style.height = editorArea.offsetHeight + 'px';
 		};
 		window.addEventListener('resize', editonresize, false);
@@ -408,6 +416,23 @@
 			viewportMargin: Infinity,
 			extraKeys: { "Ctrl-Space": "autocomplete" }
 		});
+		var isClicked;
+		editorDiv.onmousedown= function(e){
+			if(e.clientX-dividerX<30){
+				isClicked=true;
+			}
+		}
+		onmouseup=function(e){
+			isClicked=false;
+		}
+		onmousemove = function(e){
+			if (isClicked){
+				dragLoc=(e.clientX-30)/window.innerWidth*2.030;
+				onresize();
+				editonresize();
+			}
+		}
+		window.addEventListener('moveDivider', onmousemove, false);
 		
 		function myUpdateFunction(event) {
 			code = Blockly.Python.workspaceToCode(workspace);
