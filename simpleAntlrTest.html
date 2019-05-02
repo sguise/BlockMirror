@@ -1,0 +1,37 @@
+<html>
+	<head>
+		<script src="build/python_bundle.js"></script>
+	</head>
+
+
+ 	<script>
+    
+        const input = `
+# A comment!
+def do_something(a: int, b: str) -> list:
+    for x in [1, 2, 3, "banana"]:
+        return full_name.split({'X': y})
+    print(True)
+do_something(strawberry for orange in apple if pineapple)
+`;//input
+
+        const chars = new window.antlr4.InputStream(input);
+        const lexer = new window.Python3Lexer.Python3Lexer(chars);
+        lexer.strictMode = false; 
+        const tokens = new window.antlr4.CommonTokenStream(lexer);
+        const parser = new window.Python3Parser.Python3Parser(tokens);
+		
+		//antlr tree printer
+		console.log('Python input:');
+		console.log(input);
+		console.log('output:');
+		try {
+            tree = parser.file_input();
+            console.log(tree.toStringTree(this,parser));
+		} catch (error) {
+            console.log(error);
+		}
+    
+     </script>
+
+ </html>
