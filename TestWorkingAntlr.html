@@ -443,18 +443,9 @@
 		
 		function myUpdateFunction(event) {
 			code = Blockly.Python.workspaceToCode(workspace);
-			console.log(code);
 			
 			editor.getDoc().setValue(code);
-
-            console.log(editor.getValue());
-		}
-		workspace.addChangeListener(myUpdateFunction);
-
-
-
-		window.setInterval(function(){
-			const chars = new window.antlr4.InputStream(editor.getValue());
+            const chars = new window.antlr4.InputStream(editor.getValue());
         const lexer = new window.Python3Lexer.Python3Lexer(chars);
         lexer.strictMode = false; 
         const tokens = new window.antlr4.CommonTokenStream(lexer);
@@ -467,9 +458,10 @@
             console.log(error);
 		}
 			console.log(editor.getValue());
-		}, 1000);
-		
-		
+		}
+		workspace.addChangeListener(myUpdateFunction);
+
+
     </script>
 
 </html>
