@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<script src="../node_modules/codemirror/lib/codemirror.js"></script>
+        <script src="../node_modules/codemirror/lib/codemirror.js"></script>
 		<link rel="stylesheet" href="../node_modules/codemirror/lib/codemirror.css">
 		<script src="../node_modules/codemirror/mode/css/css.js"></script>
 		<script src="../node_modules/codemirror/mode/python/python.js"></script>
@@ -8,22 +8,19 @@
 		<script src="../node_modules/codemirror/addon/hint/css-hint.js"></script>
 		<link rel="stylesheet" href="../node_modules/codemirror/addon/hint/show-hint.css">
 		<link rel="stylesheet" href="../node_modules/codemirror/theme/ambiance.css">
-		<script src="../node_modules/antlr4/index.js"></script>
-		<script src="../lib/ECMAScriptLexer.js"></script>
-		<script src="../lib/ECMAScriptParser.js"></script>
 
-
- 		<style>
+		<script src="build/python_bundle.js"></script>
+		<style>
 			body {
 				background-color: #eee;
 			}
-			.CodeMirror{
-				height: auto;
-			}
+            .CodeMirror{
+                height:auto;
+            }
 		</style>
 	</head>
-
-     <table style="height: 100%; width: 100%">
+	
+    <table style="height: 100%; width: 100%">
         <tbody>
             <tr>
                 <td id="blocklyArea" style="height: 99%; background: #fc9; text-align: center"></td>
@@ -31,17 +28,16 @@
             </tr>
         </tbody>
 	</table>
-
- 	<script src="../node_modules/blockly/blockly_compressed.js"></script>
+    <script src="../node_modules/blockly/blockly_compressed.js"></script>
 	<script src="../node_modules/blockly/python_compressed.js"></script>
 
  	<script src="../node_modules/blockly/blocks_compressed.js"></script>
 	<script src="../node_modules/blockly/msg/js/en.js"></script>
 
- 	<div id="blocklyDiv" style="position: absolute"></div>
-	<div id="editorDiv" style="position: absolute;" ></div>
+	<div id="blocklyDiv" style="position: absolute"></div>
+	<div id="editorDiv" style="position: absolute"></div>
 
- 	<xml id="toolbox" style="display: none">
+	<xml id="toolbox" style="display: none">
 	  <category name="Logic" colour="%{BKY_LOGIC_HUE}">
 		<block type="controls_if"></block>
 		<block type="logic_compare"></block>
@@ -352,13 +348,12 @@
 	  <category name="Functions" colour="%{BKY_PROCEDURES_HUE}" custom="PROCEDURE"></category>
 	</xml>
 
- 	<script>
-		//antlr4
-		//var antlr4 = require('../node_modules/antlr4/index.js');
-		//var ECMAScriptLexer = require('../lib/ECMAScriptLexer.js');
-		//var ECMAScriptParser = require('../lib/ECMAScriptParser.js');
+
+	<script>
+		
 		var blocklyArea = document.getElementById('blocklyArea');
 		var blocklyDiv = document.getElementById('blocklyDiv');
+		var dragLoc = 1;
 		var workspace = Blockly.inject(blocklyDiv,
 		  {toolbox: document.getElementById('toolbox')});
 		var onresize = function(e) {
@@ -374,35 +369,49 @@
 			// Position blocklyDiv over blocklyArea.
 			blocklyDiv.style.left = x + 'px';
 			blocklyDiv.style.top = y + 'px';
-			blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
+			blocklyDiv.style.width = (blocklyArea.offsetWidth+3)*dragLoc + 'px';
 			blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
 			Blockly.svgResize(workspace);
 		};
 		window.addEventListener('resize', onresize, false);
 		onresize();
 		Blockly.svgResize(workspace);
- 		var editorArea = document.getElementById('editorArea');
+		
+		
+
+
+	
+	
+		var editorArea = document.getElementById('editorArea');
 		var editorDiv = document.getElementById('editorDiv');
+		var dividerX;
 		var editonresize = function(e) {
 			// Compute the absolute coordinates and dimensions of blocklyArea.
 			var editelement = editorArea;
 			var editx = 0;
 			var edity = 0;
+			var xshift = editelement.offsetLeft*dragLoc;
+			editx += xshift;
+			edity += editelement.offsetTop;
+			editelement = editelement.offsetParent;
 			do {
 				  editx += editelement.offsetLeft;
 				  edity += editelement.offsetTop;
 				  editelement = editelement.offsetParent;
 			} while (editelement);
 			// Position editorDiv over editorArea.
+			dividerX=editx;
 			editorDiv.style.left = editx + 'px';
 			editorDiv.style.top = edity + 'px';
-			editorDiv.style.width = editorArea.offsetWidth + 'px';
+			editorDiv.style.width = window.innerWidth-xshift + 'px';
 			editorDiv.style.height = editorArea.offsetHeight + 'px';
 		};
 		window.addEventListener('resize', editonresize, false);
 		editonresize();
- 		var code = Blockly.Python.workspaceToCode(workspace);
- 		var editor = CodeMirror(document.getElementById("editorDiv"), {
+		
+		var code = Blockly.Python.workspaceToCode(workspace);
+		
+		var editor = CodeMirror(document.getElementById("editorDiv"), {
 			value: code,
 			mode: "python",
 			tabSize: 5,
@@ -411,47 +420,56 @@
 			viewportMargin: Infinity,
 			extraKeys: { "Ctrl-Space": "autocomplete" }
 		});
- 		//antlr input
-		const input = '{x: new Number(100)}';//input
- 		const chars = new InputStream(input);
-		const lexer = new ECMAScriptLexer(chars);
- 		lexer.strictMode = false; 
- 		const tokens = new CommonTokenStream(lexer);
-		const parser = new ECMAScriptParser(tokens);
- 		
- 		function myUpdateFunction(event) {
+		
+
+
+		var isClicked;
+		editorDiv.onmousedown= function(e){
+			if(e.clientX-dividerX<30){
+				isClicked=true;
+			}
+		}
+		onmouseup=function(e){
+			isClicked=false;
+		}
+		onmousemove = function(e){
+			if (isClicked){
+				dragLoc=(e.clientX-30)/window.innerWidth*2.030;
+				onresize();
+				editonresize();
+			}
+		}
+		window.addEventListener('moveDivider', onmousemove, false);
+		
+		function myUpdateFunction(event) {
 			code = Blockly.Python.workspaceToCode(workspace);
 			console.log(code);
-			//document.getElementById('value').value = code;
- 			editor.setValue(code);
+			
+			editor.getDoc().setValue(code);
+
+            console.log(editor.getValue());
 		}
 		workspace.addChangeListener(myUpdateFunction);
-		
-		//antlr tree printer
-		console.log('JavaScript input:');
-		console.log(input);
-		console.log('output:');
+
+
+
+		window.setInterval(function(){
+			const chars = new window.antlr4.InputStream(editor.getValue());
+        const lexer = new window.Python3Lexer.Python3Lexer(chars);
+        lexer.strictMode = false; 
+        const tokens = new window.antlr4.CommonTokenStream(lexer);
+        const parser = new window.Python3Parser.Python3Parser(tokens);
+	
 		try {
-  	tree = parser.program();
-  
-  	console.log(tree.toStringTree(this,parser));
+            tree = parser.file_input();
+            console.log("THIS IS THE TREE: ", tree.toStringTree(this,parser));
 		} catch (error) {
-  		console.log(error);
+            console.log(error);
 		}
-    //
- 		window.setInterval(function(){
 			console.log(editor.getValue());
 		}, 1000);
-
-
-
-
-
-
-
-
-
 		
-     </script>
+		
+    </script>
 
- </html>
+</html>
