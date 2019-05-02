@@ -2,8 +2,8 @@
 
 },{}],2:[function(require,module,exports){
 window.antlr4 = require('./lib/antlr4/index');
-window.ECMAScriptLexer = require('./lib/ECMAScriptLexer.js');
-window.ECMAScriptParser = require('./lib/ECMAScriptParser.js');
+window.ECMAScriptLexer = require('./lib/ECMAScript/ECMAScriptLexer.js');
+window.ECMAScriptParser = require('./lib/ECMAScript/ECMAScriptParser.js');
 // const ECMAScriptListener = require('./lib/ECMAScriptListener.js');
 // const ECMAScriptVisitor = require('./lib/ECMAScriptVisitor.js');
 // const PythonGenerator = require('./codegeneration/PythonGenerator.js');
@@ -40,10 +40,10 @@ try {
   console.log(error);
 }
 
-},{"./lib/ECMAScriptLexer.js":3,"./lib/ECMAScriptParser.js":5,"./lib/antlr4/index":48}],3:[function(require,module,exports){
+},{"./lib/ECMAScript/ECMAScriptLexer.js":3,"./lib/ECMAScript/ECMAScriptParser.js":5,"./lib/antlr4/index":48}],3:[function(require,module,exports){
 // Generated from grammars/ECMAScript.g4 by ANTLR 4.7.2
 // jshint ignore: start
-var antlr4 = require('../lib/antlr4/index');
+var antlr4 = require('../../lib/antlr4/index');
 
 
 
@@ -1157,10 +1157,10 @@ ECMAScriptLexer.prototype.Yield_sempred = function(localctx, predIndex) {
 exports.ECMAScriptLexer = ECMAScriptLexer;
 
 
-},{"../lib/antlr4/index":48}],4:[function(require,module,exports){
+},{"../../lib/antlr4/index":48}],4:[function(require,module,exports){
 // Generated from grammars/ECMAScript.g4 by ANTLR 4.7.2
 // jshint ignore: start
-var antlr4 = require('../lib/antlr4/index');
+var antlr4 = require('../../lib/antlr4/index');
 
 // This class defines a complete listener for a parse tree produced by ECMAScriptParser.
 function ECMAScriptListener() {
@@ -2064,10 +2064,10 @@ ECMAScriptListener.prototype.exitEof = function(ctx) {
 
 
 exports.ECMAScriptListener = ECMAScriptListener;
-},{"../lib/antlr4/index":48}],5:[function(require,module,exports){
+},{"../../lib/antlr4/index":48}],5:[function(require,module,exports){
 // Generated from grammars/ECMAScript.g4 by ANTLR 4.7.2
 // jshint ignore: start
-var antlr4 = require('../lib/antlr4/index');
+var antlr4 = require('../../lib/antlr4/index');
 var ECMAScriptListener = require('./ECMAScriptListener').ECMAScriptListener;
 var ECMAScriptVisitor = require('./ECMAScriptVisitor').ECMAScriptVisitor;
 
@@ -11091,10 +11091,10 @@ ECMAScriptParser.prototype.eos_sempred = function(localctx, predIndex) {
 
 exports.ECMAScriptParser = ECMAScriptParser;
 
-},{"../lib/antlr4/index":48,"./ECMAScriptListener":4,"./ECMAScriptVisitor":6}],6:[function(require,module,exports){
+},{"../../lib/antlr4/index":48,"./ECMAScriptListener":4,"./ECMAScriptVisitor":6}],6:[function(require,module,exports){
 // Generated from grammars/ECMAScript.g4 by ANTLR 4.7.2
 // jshint ignore: start
-var antlr4 = require('../lib/antlr4/index');
+var antlr4 = require('../../lib/antlr4/index');
 
 // This class defines a complete generic visitor for a parse tree produced by ECMAScriptParser.
 
@@ -11702,7 +11702,7 @@ ECMAScriptVisitor.prototype.visitEof = function(ctx) {
 
 
 exports.ECMAScriptVisitor = ECMAScriptVisitor;
-},{"../lib/antlr4/index":48}],7:[function(require,module,exports){
+},{"../../lib/antlr4/index":48}],7:[function(require,module,exports){
 //
 /* Copyright (c) 2012-2017 The ANTLR Project. All rights reserved.
  * Use of this file is governed by the BSD 3-clause license that

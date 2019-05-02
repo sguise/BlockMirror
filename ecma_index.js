@@ -1,6 +1,6 @@
 window.antlr4 = require('./lib/antlr4/index');
-window.ECMAScriptLexer = require('./lib/ECMAScriptLexer.js');
-window.ECMAScriptParser = require('./lib/ECMAScriptParser.js');
+window.ECMAScriptLexer = require('./lib/ECMAScript/ECMAScriptLexer.js');
+window.ECMAScriptParser = require('./lib/ECMAScript/ECMAScriptParser.js');
 // const ECMAScriptListener = require('./lib/ECMAScriptListener.js');
 // const ECMAScriptVisitor = require('./lib/ECMAScriptVisitor.js');
 // const PythonGenerator = require('./codegeneration/PythonGenerator.js');
