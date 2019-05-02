@@ -1,24 +1,24 @@
 <html>
 	<head>
-		<script src="build/bundle.js"></script>
+		<script src="build/python_bundle.js"></script>
 	</head>
 
 
  	<script>
-		
-        const input = '{x: new Number(100)}';//input
- 		const chars = new window.antlr4.InputStream(input);
-		const lexer = new window.ECMAScriptLexer.ECMAScriptLexer(chars);
- 		lexer.strictMode = false; 
- 		const tokens = new window.antlr4.CommonTokenStream(lexer);
-		const parser = new window.ECMAScriptParser.ECMAScriptParser(tokens);
+    
+        const input = 'for x in y:\n  if z:\n    a = 2+"Hello"';//input
+        const chars = new window.antlr4.InputStream(input);
+        const lexer = new window.Python3Lexer.Python3Lexer(chars);
+        lexer.strictMode = false; 
+        const tokens = new window.antlr4.CommonTokenStream(lexer);
+        const parser = new window.Python3Parser.Python3Parser(tokens);
 		
 		//antlr tree printer
-		console.log('JavaScript input:');
+		console.log('Python input:');
 		console.log(input);
 		console.log('output:');
 		try {
-            tree = parser.program();
+            tree = parser.file_input();
             console.log(tree.toStringTree(this,parser));
 		} catch (error) {
             console.log(error);
