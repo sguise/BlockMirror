@@ -1,6 +1,6 @@
-const antlr4 = require('antlr4/index');
-const ECMAScriptLexer = require('./lib/ECMAScriptLexer.js');
-const ECMAScriptParser = require('./lib/ECMAScriptParser.js');
+window.antlr4 = require('./lib/antlr4/index');
+window.ECMAScriptLexer = require('./lib/ECMAScriptLexer.js');
+window.ECMAScriptParser = require('./lib/ECMAScriptParser.js');
 // const ECMAScriptListener = require('./lib/ECMAScriptListener.js');
 // const ECMAScriptVisitor = require('./lib/ECMAScriptVisitor.js');
 // const PythonGenerator = require('./codegeneration/PythonGenerator.js');
@@ -8,13 +8,13 @@ const ECMAScriptParser = require('./lib/ECMAScriptParser.js');
 
 const input = '{x: new Number(100)}';//input
 
-const chars = new antlr4.InputStream(input);
-const lexer = new ECMAScriptLexer.ECMAScriptLexer(chars);
+const chars = new window.antlr4.InputStream(input);
+const lexer = new window.ECMAScriptLexer.ECMAScriptLexer(chars);
 
 lexer.strictMode = false; 
 
-const tokens = new antlr4.CommonTokenStream(lexer);
-const parser = new ECMAScriptParser.ECMAScriptParser(tokens);
+const tokens = new window.antlr4.CommonTokenStream(lexer);
+const parser = new window.ECMAScriptParser.ECMAScriptParser(tokens);
 // const listener = new ErrorListener();
 // const visitor = new ECMAScriptVisitor.ECMAScriptVisitor();
 // const plistener = new ECMAScriptListener.ECMAScriptListener();
