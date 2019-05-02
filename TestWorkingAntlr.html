@@ -5,12 +5,18 @@
 		<script src="../node_modules/codemirror/mode/css/css.js"></script>
 		<script src="../node_modules/codemirror/mode/python/python.js"></script>
 		<script src="../node_modules/codemirror/addon/hint/show-hint.js"></script>
-		<script src="../node_modules/codemirror/addon/hint/css-hint.js"></script>
+        <script src="../node_modules/codemirror/addon/hint/css-hint.js"></script>
+        <script src="../node_modules/blockly/blockly_compressed.js"></script>
+        <script src="../node_modules/blockly/python_compressed.js"></script>
+    
+         <script src="../node_modules/blockly/blocks_compressed.js"></script>
+        <script src="../node_modules/blockly/msg/js/en.js"></script>
 		<link rel="stylesheet" href="../node_modules/codemirror/addon/hint/show-hint.css">
 		<link rel="stylesheet" href="../node_modules/codemirror/theme/ambiance.css">
 
 		<script src="build/python_bundle.js"></script>
-		<style>
+    
+        <style>
 			body {
 				background-color: #eee;
 			}
@@ -28,11 +34,7 @@
             </tr>
         </tbody>
 	</table>
-    <script src="../node_modules/blockly/blockly_compressed.js"></script>
-	<script src="../node_modules/blockly/python_compressed.js"></script>
 
- 	<script src="../node_modules/blockly/blocks_compressed.js"></script>
-	<script src="../node_modules/blockly/msg/js/en.js"></script>
 
 	<div id="blocklyDiv" style="position: absolute"></div>
 	<div id="editorDiv" style="position: absolute"></div>
@@ -354,6 +356,9 @@
 		var blocklyArea = document.getElementById('blocklyArea');
 		var blocklyDiv = document.getElementById('blocklyDiv');
 		var dragLoc = 1;
+
+
+
 		var workspace = Blockly.inject(blocklyDiv,
 		  {toolbox: document.getElementById('toolbox')});
 		var onresize = function(e) {
@@ -376,15 +381,11 @@
 		window.addEventListener('resize', onresize, false);
 		onresize();
 		Blockly.svgResize(workspace);
-		
-		
-
-
-	
 	
 		var editorArea = document.getElementById('editorArea');
 		var editorDiv = document.getElementById('editorDiv');
 		var dividerX;
+
 		var editonresize = function(e) {
 			// Compute the absolute coordinates and dimensions of blocklyArea.
 			var editelement = editorArea;
@@ -409,7 +410,9 @@
 		window.addEventListener('resize', editonresize, false);
 		editonresize();
 		
+    //Variable to grab the python code of the blockly workspace:
 		var code = Blockly.Python.workspaceToCode(workspace);
+
 		
 		var editor = CodeMirror(document.getElementById("editorDiv"), {
 			value: code,
@@ -422,7 +425,7 @@
 		});
 		
 
-
+        //function for dynamiclly scalable winow
 		var isClicked;
 		editorDiv.onmousedown= function(e){
 			if(e.clientX-dividerX<30){
@@ -433,28 +436,31 @@
 			isClicked=false;
 		}
 		onmousemove = function(e){
+            var margin_error = 2.03;
 			if (isClicked){
-				dragLoc=(e.clientX-30)/window.innerWidth*2.030;
+				dragLoc=(e.clientX-30)/window.innerWidth* margin_error;
 				onresize();
 				editonresize();
 			}
 		}
 		window.addEventListener('moveDivider', onmousemove, false);
-		
+
+
+//Update function to output the parse tree after the blockly workspace has changed
 		function myUpdateFunction(event) {
 			code = Blockly.Python.workspaceToCode(workspace);
 			
 			editor.getDoc().setValue(code);
             const chars = new window.antlr4.InputStream(editor.getValue());
-        const lexer = new window.Python3Lexer.Python3Lexer(chars);
-        lexer.strictMode = false; 
-        const tokens = new window.antlr4.CommonTokenStream(lexer);
-        const parser = new window.Python3Parser.Python3Parser(tokens);
+            const lexer = new window.Python3Lexer.Python3Lexer(chars);
+            lexer.strictMode = false; 
+            const tokens = new window.antlr4.CommonTokenStream(lexer);
+            const parser = new window.Python3Parser.Python3Parser(tokens);
 	
-		try {
-            tree = parser.file_input();
-            console.log("THIS IS THE TREE: ", tree.toStringTree(this,parser));
-		} catch (error) {
+		    try {
+                tree = parser.file_input();
+                console.log("THIS IS THE TREE: ", tree.toStringTree(this,parser));
+		}   catch (error) {
             console.log(error);
 		}
 			console.log(editor.getValue());
