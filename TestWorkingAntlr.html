@@ -361,6 +361,12 @@
 
 		var workspace = Blockly.inject(blocklyDiv,
 		  {toolbox: document.getElementById('toolbox')});
+		  
+		//code for creating a block programmatically
+		var bl = workspace.newBlock("controls_if");
+		bl.initSvg();
+		bl.render();
+		  
 		var onresize = function(e) {
 		// Compute the absolute coordinates and dimensions of blocklyArea.
 			var element = blocklyArea;
