@@ -352,20 +352,14 @@
 
 
 	<script>
-		
+	
 		var blocklyArea = document.getElementById('blocklyArea');
 		var blocklyDiv = document.getElementById('blocklyDiv');
 		var dragLoc = 1;
 
-
-
 		var workspace = Blockly.inject(blocklyDiv,
 		  {toolbox: document.getElementById('toolbox')});
 		  
-		//code for creating a block programmatically
-		var bl = workspace.newBlock("controls_if");
-		bl.initSvg();
-		bl.render();
 		  
 		var onresize = function(e) {
 		// Compute the absolute coordinates and dimensions of blocklyArea.
@@ -430,6 +424,15 @@
 			extraKeys: { "Ctrl-Space": "autocomplete" }
 		});
 		
+		editor.on('change',function(editor){
+			if (editor.hasFocus()){
+				console.log("Focus is in CodeMirror");
+				//code for creating a block programmatically
+				//var bl = workspace.newBlock("controls_if");
+				//bl.initSvg();
+				//bl.render();
+			}
+		});
 
         //function for dynamiclly scalable winow
 		var isClicked;
