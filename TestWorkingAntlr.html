@@ -30,7 +30,7 @@
         <tbody>
             <tr>
                 <td id="blocklyArea" style="height: 99%; background: #fc9; text-align: center"></td>
-				<td id="editorArea" style="height: 99%; background: #fc9; text-align: center"></td>
+								<td id="editorArea" style="height: 99%; background: #fc9; text-align: center"></td>
             </tr>
         </tbody>
 	</table>
@@ -356,6 +356,7 @@
 		var blocklyArea = document.getElementById('blocklyArea');
 		var blocklyDiv = document.getElementById('blocklyDiv');
 		var dragLoc = 1;
+		var updating = 2;
 
 		var workspace = Blockly.inject(blocklyDiv,
 		  {toolbox: document.getElementById('toolbox')});
@@ -423,16 +424,6 @@
 			viewportMargin: Infinity,
 			extraKeys: { "Ctrl-Space": "autocomplete" }
 		});
-		
-		editor.on('change',function(editor){
-			if (editor.hasFocus()){
-				console.log("Focus is in CodeMirror");
-				//code for creating a block programmatically
-				//var bl = workspace.newBlock("controls_if");
-				//bl.initSvg();
-				//bl.render();
-			}
-		});
 
         //function for dynamiclly scalable winow
 		var isClicked;
@@ -453,10 +444,25 @@
 			}
 		}
 		window.addEventListener('moveDivider', onmousemove, false);
+		
+		editor.on('change',function(editor){
+			if (updating == 0){
+				updating = 1;
+				//code for creating a block programmatically
+				var bl = workspace.newBlock("controls_if");
+				bl.initSvg();
+				bl.render();
+			}
+			else{
+				updating = 0;
+			}
+		});
 
 
 //Update function to output the parse tree after the blockly workspace has changed
 		function myUpdateFunction(event) {
+			if(updating == 0){
+				updating = 1;
 			code = Blockly.Python.workspaceToCode(workspace);
 			
 			editor.getDoc().setValue(code);
@@ -474,6 +480,13 @@
 		}
 			console.log(editor.getValue());
 		}
+		else if(updating == 2){
+			updating = 0;
+		}
+		else{
+			updating = 0;
+		}
+	}
 		workspace.addChangeListener(myUpdateFunction);
 
 
