@@ -467,11 +467,11 @@
 			
 			editor.getDoc().setValue(code);
 						/* Antlr, invoking the parser
-						*	 InputStream - Vacuum all input from a Reader/InputStream and then treat it like a char[] buffer. Can also pass in a String or char[] to use.
-						*  Lexer — Recognizer that draws input symbols from a character stream, and performs lexical analysis.
-						*	 Token — Sequence of characters in the source program that matches the pattern for a token and is identified by the lexical analyser as an instance of that token.
-						*	 Parser — An element of a compiler that takes input data and builds a parse tree.
-						*  Parse tree — an tree that produced by parser, which is ordered and rooted . It reflects the syntax of the input and contains all relationships between elements.
+						* InputStream - Vacuum all input from a Reader/InputStream and then treat it like a char[] buffer. Can also pass in a String or char[] to use.
+						* Lexer — Recognizer that draws input symbols from a character stream, and performs lexical analysis.
+						* Token — Sequence of characters in the source program that matches the pattern for a token and is identified by the lexical analyser as an instance of that token.
+						* Parser — An element of a compiler that takes input data and builds a parse tree.
+						* Parse tree — an tree that produced by parser, which is ordered and rooted . It reflects the syntax of the input and contains all relationships between elements.
 						*/
             const chars = new window.antlr4.InputStream(editor.getValue());
             const lexer = new window.Python3Lexer.Python3Lexer(chars);
