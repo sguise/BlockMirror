@@ -454,24 +454,10 @@
 			updating = 1;
 			// Adds a new block to the workspace.
 			// "controls_if" can be replaced by any other block name found in \node_modules\blockly\blocks
-			var bl = workspace.newBlock("controls_if");
 			
-			//Display new block visually on the Blocky area
-			bl.initSvg();
-			bl.render();
-		}
-		else {
-			updating = 0;
-		}
-	});
-
-
-	//Update function to output the parse tree after the blockly workspace has changed
-	function myUpdateFunction(event) {
-		if (updating == 0) {
-			updating = 1;
-			code = Blockly.Python.workspaceToCode(workspace);
-
+			
+			console.log(editor.getValue());
+			
 			/* Antlr, invoking the parser
 			* InputStream - Vacuum all input from a Reader/InputStream and then treat it like a char[] buffer. Can also pass in a String or char[] to use.
 			* Lexer — Recognizer that draws input symbols from a character stream, and performs lexical analysis.
@@ -492,7 +478,24 @@
 			} catch (error) {
 				console.log(error);
 			}
-			console.log(editor.getValue());
+			
+			var bl = workspace.newBlock("controls_if");
+			
+			//Display new block visually on the Blocky area
+			bl.initSvg();
+			bl.render();
+		}
+		else {
+			updating = 0;
+		}
+	});
+
+
+	//Update function to output the parse tree after the blockly workspace has changed
+	function myUpdateFunction(event) {
+		if (updating == 0) {
+			updating = 1;
+			code = Blockly.Python.workspaceToCode(workspace);
 		}
 		else if (updating == 2) {
 			updating = 0;
