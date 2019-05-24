@@ -2,13 +2,13 @@
 ### Current working version: TestWorkingAntlr.html
 
 #### How to set up the environment:
-Fork from repository located here (specifically the master branch): https://github.com/sguise/BlockMirror<br>
-Install NPM (Node Package Manager) if it is not previously installed on your machine<br>
-(The node_modules folder should not be inside the Block Mirror folder)<br>
-At the same folder level of the repository, run these 2 commands:<br>
-npm install codemirror<br>
-npm install blockly<br>
-Simply open TestWorkingAntlr.html in a web browser to view the current version of our product.
+1. Fork from repository located here (specifically the master branch): https://github.com/sguise/BlockMirror<br>
+2. Install NPM (Node Package Manager) if it is not previously installed on your machine<br>
+  (The node_modules folder should not be inside the Block Mirror folder)<br>
+3. At the same folder level of the repository, run these 2 commands:<br>
+  npm install codemirror<br>
+  npm install blockly<br>
+4. Simply open TestWorkingAntlr.html in a web browser to view the current version of our product.
 
 
 #### Inserting the Blockly and CodeMirror workspaces on the webpage:
