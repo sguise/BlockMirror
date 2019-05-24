@@ -12,8 +12,8 @@
 
 
 #### Inserting the Blockly and CodeMirror workspaces on the webpage:
-https://developers.google.com/blockly/guides/configure/web/fixed-size
-https://developers.google.com/blockly/guides/configure/web/resizable
+https://developers.google.com/blockly/guides/configure/web/fixed-size<br>
+https://developers.google.com/blockly/guides/configure/web/resizable<br>
 The webpage is divided into two <td> table cells under an HTML table, which resizes in real-time when the browser window becomes resized. Blockly scripts, the workspace (where you can drag blocks around), and the toolbox (where you can drag already defined blocks from) are first defined but not displayed. The “onresize” listener function is then defined to calculate the Blockly area. Blockly is then placed over the Blockly area initially defined. This process was then duplicated to inject the CodeMirror editor on the webpage. The code between the two should be next to each other, but with the variable name “edit” in front for the CodeMirror editor. 
 
 An issue with CodeMirror resizing to the dimensions of the browser was solved by setting the height of the .Codemirror CSS to ‘auto’ and the viewpointmargin of the JSON editor var to ‘Infinity’ (refer to lines 25 and 428 of the TestWorkingAntlr.html file respectively).
