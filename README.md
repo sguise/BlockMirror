@@ -1,5 +1,5 @@
 # BlockMirror
-# Current working version: TestWorkingAntlr.html
+### Current working version: TestWorkingAntlr.html
 
 #### How to set up the environment:
 Fork from repository located here (specifically the master branch): https://github.com/sguise/BlockMirror
