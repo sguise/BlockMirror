@@ -8,7 +8,7 @@
 3. At the same folder level of the repository, run these 2 commands:<br>
   npm install codemirror<br>
   npm install blockly<br>
-4. Simply open TestWorkingAntlr.html in a web browser to view the current version of our product.
+4. Open TestWorkingAntlr.html in a web browser to view the current version of our project.
 
 
 #### Inserting the Blockly and CodeMirror workspaces on the webpage:
