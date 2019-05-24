@@ -38,7 +38,7 @@ ANTLR is used to generate parse trees of the contents within the CodeMirror text
 
 
 #### Spawning Blocks
-https://groups.google.com/forum/#!topic/blockly/zOBnFBul4a4
+https://groups.google.com/forum/#!topic/blockly/zOBnFBul4a4<br>
 Blockly has the function <workspace>.newBlock() that allows you to add any block defined in \node_modules\blockly\blocks\ into the workspace. This only adds it the workspace data, so the workspace view still needs to update the SVG to render the newly added block.
 
 Connecting and managing the blocks are separate functions (can be found in Blockly’s documentation). The data of what blocks exist and rendering blocks are separate sides (i.e. model and view). Connecting and rending connected blocks have not yet been implemented.
